@@ -36,16 +36,17 @@ class MainViewController: UIViewController ,UIScrollViewDelegate {
         scrollView.frame = screenFrame
         //scrollView.isPagingEnabled = true
         scrollView.contentSize = CGSize(width: screenWidth * CGFloat(numberOfPages), height: screenHeigt)
-        scrollView.backgroundColor = UIColor.lightGrayColor()
+        scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         scrollView.delegate = self
         //设置页面控制器
         let pageControlHeigt = screenHeigt / 10
         pageControl.frame = CGRect(x: 0, y: screenHeigt - pageControlHeigt, width: screenWidth, height: pageControlHeigt)
         pageControl.numberOfPages = numberOfPages
         pageControl.currentPage = 0
-        pageControl.backgroundColor = UIColor.grayColor()
+        pageControl.backgroundColor = UIColor(red: 0.70, green: 0.70, blue: 0.70, alpha: 1)
         pageControl.addTarget(self, action: "pageControlDidChanged:", forControlEvents: UIControlEvents.ValueChanged)
         
+        //添加滚动视图和页面控制器
         self.view.addSubview(scrollView)
         self.view.addSubview(pageControl)
     }
