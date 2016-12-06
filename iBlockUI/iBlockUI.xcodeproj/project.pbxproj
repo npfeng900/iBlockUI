@@ -15,6 +15,7 @@
 		6D1C49301DF0692600188893 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C492D1DF0692600188893 /* MainViewController.swift */; };
 		6D23C31A1DF41C7C0052CCF8 /* PaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23C3191DF41C7C0052CCF8 /* PaneView.swift */; };
 		6DA52C521DF3F44600EB13DF /* SupportFiles in Resources */ = {isa = PBXBuildFile; fileRef = 6DA52C511DF3F44600EB13DF /* SupportFiles */; };
+		6DC2D2181DF70EAD000040AB /* ExtentionUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2D2171DF70EAD000040AB /* ExtentionUIScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		6D1C492D1DF0692600188893 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6D23C3191DF41C7C0052CCF8 /* PaneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneView.swift; sourceTree = "<group>"; };
 		6DA52C511DF3F44600EB13DF /* SupportFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SupportFiles; sourceTree = "<group>"; };
+		6DC2D2171DF70EAD000040AB /* ExtentionUIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtentionUIScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				6D1C491C1DF0675B00188893 /* ViewController.swift */,
 				6D1C492D1DF0692600188893 /* MainViewController.swift */,
 				6D23C3191DF41C7C0052CCF8 /* PaneView.swift */,
+				6DC2D2171DF70EAD000040AB /* ExtentionUIScrollView.swift */,
 				6D1C491E1DF0675B00188893 /* Main.storyboard */,
 				6D1C49211DF0675B00188893 /* Assets.xcassets */,
 				6D1C49231DF0675B00188893 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D23C31A1DF41C7C0052CCF8 /* PaneView.swift in Sources */,
+				6DC2D2181DF70EAD000040AB /* ExtentionUIScrollView.swift in Sources */,
 				6D1C491D1DF0675B00188893 /* ViewController.swift in Sources */,
 				6D1C491B1DF0675B00188893 /* AppDelegate.swift in Sources */,
 				6D1C49301DF0692600188893 /* MainViewController.swift in Sources */,
