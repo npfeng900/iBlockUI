@@ -11,27 +11,54 @@ import UIKit
 class MainViewController: UIViewController {
     
     // ///////////////////////////////////////////////////////////////////////////////
-    // 主题颜色
-    var themeColor = UIColor(red: 0/255, green: 131/255, blue: 38/255, alpha: 1.0)
+    // 滚动视图页面控制器
+    var pageControl = UIPageControl()
     // 滚动视图
     var scrollView = UIScrollView()
     // 用户的栏目视图数组(包括栏目视图尺寸和简略信息)
     var paneViews = [PaneView]()
-    // 滚动视图页面控制器
-    var pageControl = UIPageControl()
+    // pane数据，存储了所有pane数据
+    let paneDatas = PaneDatas()
+    // 主题颜色
+    var themeColor = UIColor(red: 0/255, green: 131/255, blue: 38/255, alpha: 1.0)
     
     
     // ///////////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        loadInformationsOfPaneViews()
-        
+        initDatas()
+        initNotifications()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    deinit {
+        deinitNotifications()
+    }
+    
+    
+    // ///////////////////////////////////////////////////////////////////////////////
+    // MARK: - 自定义函数
+    /** init数据信息 */
+    func initDatas() {
+        //加载pane数据
+        paneDatas.loadDatas(fileName: "panes", ofType: "json", inDirectory: "SupportFiles")
+        //初始化paneViews
+        for var i = 0; i < paneDatas.getCount(); i++
+        {
+            let paneViewObject = PaneView()
+           // paneView.titleLabel.text = paneDatas.getTitle(atIndex: i)
+            paneViews.append(paneViewObject)
+        }
+    }
+    /** init通知消息 */
+    func initNotifications() {
         // 添加设备方向变化的消息通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
         // 添加手势滑动通知(要禁用scrollView的sroll功能)
-        scrollView.scrollEnabled = false
+        
         for var touchCount = 1; touchCount <= 3; touchCount++
         {
             let horizontalLeft = UISwipeGestureRecognizer(target: self, action: "horizontalSwipeLeft:")
@@ -45,47 +72,16 @@ class MainViewController: UIViewController {
         }
 
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    deinit {
+    /** deninit通知消息 */
+    func deinitNotifications() {
+        // 移除设备方向变化的消息通知
         NSNotificationCenter.defaultCenter().removeObserver(UIDeviceOrientationDidChangeNotification)
-    }
-    
-    
-    // ///////////////////////////////////////////////////////////////////////////////
-    // MARK: - 自定义函数
-    /** 加载paneView的简要信息数据 */
-    func loadInformationsOfPaneViews() {
-        //获取文件位置
-        let filePath = NSBundle.mainBundle().pathForResource("panes", ofType: "json", inDirectory: "SupportFiles")
-        //读取json文件中的栏目简要内容,并赋值给paneViews
-        if let data = NSData(contentsOfFile: filePath!)
-        {
-            do
-            {
-                if let jsonObjects:NSArray = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSArray
-                {
-                    for jsonObject in jsonObjects
-                    {
-                        let paneViewObject = PaneView()
-                        paneViewObject.infomations = jsonObject as? NSDictionary
-                        paneViewObject.backgroundColor = themeColor
-                        paneViews.append(paneViewObject)
-                    }
-                }
-            }
-            catch
-            {
-                print("Error: Parse 'channels.json'")
-            }
-        }
+        // 移除手势滑动通知
+
     }
     /** 显示背景中的视图 */
     func refreshViews() {
-        
-        /************** 获取基本信息 **************/
+        /*********************** 获取基本信息 ***********************/
         //根据设备类型方向设置布局的行列数
         var numberOfRow: Int = 0
         var numberOfColumn: Int = 0
@@ -113,10 +109,10 @@ class MainViewController: UIViewController {
         //上下边界空隙
         let verticalBorderSpace = min(viewWidth, viewHeigt) / 10
     
-        /************** 设置背景视图 **************/
+        /*********************** 设置背景视图 ***********************/
         self.view.backgroundColor = UIColor.whiteColor()
         
-        /************** 设置页面控制器 **************/
+        /*********************** 设置页面控制器 ***********************/
         let pageControlHeigt = verticalBorderSpace
         pageControl.frame = CGRect(x: 0, y: viewHeigt - pageControlHeigt, width: viewWidth, height: pageControlHeigt)
         pageControl.backgroundColor = UIColor.whiteColor()
@@ -125,14 +121,14 @@ class MainViewController: UIViewController {
         pageControl.enabled = false
         pageControl.numberOfPages = paneViews.count / (numberOfRow * numberOfColumn) + 1
         
-        /************** 设置滚动视图 **************/
+        /*********************** 设置滚动视图 ***********************/
         scrollView.frame = CGRectMake(0, verticalBorderSpace, viewWidth, viewHeigt-2 * verticalBorderSpace)
         scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageControl.numberOfPages), scrollView.frame.height)
         scrollView.scrollToPageHorizontal(page: pageControl.currentPage)
-        //scrollView.delegate = self
+        scrollView.scrollEnabled = false
         
-        /************** 设置pane视图 **************/
+        /*********************** 设置pane视图 ***********************/
         let scrollFrameWidth = scrollView.frame.width
         let scrollFrameHeight = scrollView.frame.height
         //计算边间、空隙、pane的尺寸
@@ -141,7 +137,7 @@ class MainViewController: UIViewController {
         let paneSpace = min(scrollFrameWidth, scrollFrameHeight) / CGFloat(50)
         let paneWidth = (scrollFrameWidth - horizontalEdgeSpace * 2 - paneSpace * CGFloat(numberOfColumn - 1)) / CGFloat(numberOfColumn)
         let paneHeigth = (scrollFrameHeight - verticalEdgeSpace * 2 - paneSpace * CGFloat(numberOfRow - 1)) / CGFloat(numberOfRow)
-        //设置pane在父视图scrollView中的位置
+        //设置pane在父视图scrollView中的位置和背景颜色
         for var i = 0; i < paneViews.count; i++
         {
             let iPage = i / (numberOfRow * numberOfColumn)
@@ -150,9 +146,11 @@ class MainViewController: UIViewController {
             let x = CGFloat(iPage) * scrollFrameWidth + horizontalEdgeSpace + CGFloat(iColumn) * (paneWidth + paneSpace)
             let y = verticalEdgeSpace + CGFloat(iRow) * (paneHeigth + paneSpace)
             paneViews[i].frame = CGRectMake(x, y, paneWidth, paneHeigth)
+            
+            paneViews[i].backgroundColor = themeColor
         }
         
-        /**** 添加滚动视图和页面控制器 (由于到此才完成了所有的视图属性设置，才可以添加到此)****/
+        /****************** 添加滚动视图和页面控制器 ********************/
         self.view.addSubview(pageControl)
         self.view.addSubview(scrollView)
         for var i = 0; i < paneViews.count; i++

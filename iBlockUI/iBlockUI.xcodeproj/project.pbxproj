@@ -8,28 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		6D1C491B1DF0675B00188893 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C491A1DF0675B00188893 /* AppDelegate.swift */; };
-		6D1C491D1DF0675B00188893 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C491C1DF0675B00188893 /* ViewController.swift */; };
-		6D1C49201DF0675B00188893 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1C491E1DF0675B00188893 /* Main.storyboard */; };
 		6D1C49221DF0675B00188893 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D1C49211DF0675B00188893 /* Assets.xcassets */; };
 		6D1C49251DF0675B00188893 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D1C49231DF0675B00188893 /* LaunchScreen.storyboard */; };
 		6D1C49301DF0692600188893 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C492D1DF0692600188893 /* MainViewController.swift */; };
 		6D23C31A1DF41C7C0052CCF8 /* PaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23C3191DF41C7C0052CCF8 /* PaneView.swift */; };
+		6D2A34EC1DF847EF0070C77F /* PaneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2A34EB1DF847EF0070C77F /* PaneView.xib */; };
 		6DA52C521DF3F44600EB13DF /* SupportFiles in Resources */ = {isa = PBXBuildFile; fileRef = 6DA52C511DF3F44600EB13DF /* SupportFiles */; };
-		6DC2D2181DF70EAD000040AB /* ExtentionUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2D2171DF70EAD000040AB /* ExtentionUIScrollView.swift */; };
+		6DC050711DF98F7B00320E2C /* PaneDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC050701DF98F7B00320E2C /* PaneDatas.swift */; };
+		6DC050741DF9ABD800320E2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DC050721DF9ABD800320E2C /* Main.storyboard */; };
+		6DC2D2181DF70EAD000040AB /* UIScrollViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC2D2171DF70EAD000040AB /* UIScrollViewExtention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6D1C49171DF0675B00188893 /* iBlockUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iBlockUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1C491A1DF0675B00188893 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6D1C491C1DF0675B00188893 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6D1C491F1DF0675B00188893 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D1C49211DF0675B00188893 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D1C49241DF0675B00188893 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D1C49261DF0675B00188893 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D1C492D1DF0692600188893 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6D23C3191DF41C7C0052CCF8 /* PaneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneView.swift; sourceTree = "<group>"; };
+		6D2A34EB1DF847EF0070C77F /* PaneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaneView.xib; sourceTree = "<group>"; };
 		6DA52C511DF3F44600EB13DF /* SupportFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SupportFiles; sourceTree = "<group>"; };
-		6DC2D2171DF70EAD000040AB /* ExtentionUIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtentionUIScrollView.swift; sourceTree = "<group>"; };
+		6DC050701DF98F7B00320E2C /* PaneDatas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneDatas.swift; sourceTree = "<group>"; };
+		6DC050731DF9ABD800320E2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6DC2D2171DF70EAD000040AB /* UIScrollViewExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtention.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +66,12 @@
 			children = (
 				6DA52C511DF3F44600EB13DF /* SupportFiles */,
 				6D1C491A1DF0675B00188893 /* AppDelegate.swift */,
-				6D1C491C1DF0675B00188893 /* ViewController.swift */,
 				6D1C492D1DF0692600188893 /* MainViewController.swift */,
+				6DC050721DF9ABD800320E2C /* Main.storyboard */,
+				6DC050701DF98F7B00320E2C /* PaneDatas.swift */,
 				6D23C3191DF41C7C0052CCF8 /* PaneView.swift */,
-				6DC2D2171DF70EAD000040AB /* ExtentionUIScrollView.swift */,
-				6D1C491E1DF0675B00188893 /* Main.storyboard */,
+				6D2A34EB1DF847EF0070C77F /* PaneView.xib */,
+				6DC2D2171DF70EAD000040AB /* UIScrollViewExtention.swift */,
 				6D1C49211DF0675B00188893 /* Assets.xcassets */,
 				6D1C49231DF0675B00188893 /* LaunchScreen.storyboard */,
 				6D1C49261DF0675B00188893 /* Info.plist */,
@@ -136,9 +139,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DA52C521DF3F44600EB13DF /* SupportFiles in Resources */,
+				6DC050741DF9ABD800320E2C /* Main.storyboard in Resources */,
 				6D1C49251DF0675B00188893 /* LaunchScreen.storyboard in Resources */,
 				6D1C49221DF0675B00188893 /* Assets.xcassets in Resources */,
-				6D1C49201DF0675B00188893 /* Main.storyboard in Resources */,
+				6D2A34EC1DF847EF0070C77F /* PaneView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D23C31A1DF41C7C0052CCF8 /* PaneView.swift in Sources */,
-				6DC2D2181DF70EAD000040AB /* ExtentionUIScrollView.swift in Sources */,
-				6D1C491D1DF0675B00188893 /* ViewController.swift in Sources */,
+				6DC050711DF98F7B00320E2C /* PaneDatas.swift in Sources */,
+				6DC2D2181DF70EAD000040AB /* UIScrollViewExtention.swift in Sources */,
 				6D1C491B1DF0675B00188893 /* AppDelegate.swift in Sources */,
 				6D1C49301DF0692600188893 /* MainViewController.swift in Sources */,
 			);
@@ -160,20 +164,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6D1C491E1DF0675B00188893 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6D1C491F1DF0675B00188893 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6D1C49231DF0675B00188893 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6D1C49241DF0675B00188893 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6DC050721DF9ABD800320E2C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DC050731DF9ABD800320E2C /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
