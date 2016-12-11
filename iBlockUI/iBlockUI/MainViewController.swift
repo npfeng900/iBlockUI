@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     // ///////////////////////////////////////////////////////////////////////////////
+    // MARK: - 自定义属性
     // 滚动视图页面控制器
     var pageControl = UIPageControl()
     // 滚动视图
@@ -20,10 +21,11 @@ class MainViewController: UIViewController {
     // pane数据，存储了所有pane数据
     let paneDatas = PaneDatas()
     // 主题颜色
-    var themeColor = UIColor(red: 0/255, green: 131/255, blue: 38/255, alpha: 1.0)
+    var themeColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.7)
     
     
     // ///////////////////////////////////////////////////////////////////////////////
+    // MARK: - UIViewController方法
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -37,7 +39,9 @@ class MainViewController: UIViewController {
     deinit {
         deinitNotifications()
     }
-    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
+    }
     
     // ///////////////////////////////////////////////////////////////////////////////
     // MARK: - 自定义函数
@@ -49,7 +53,7 @@ class MainViewController: UIViewController {
         for var i = 0; i < paneDatas.getCount(); i++
         {
             let paneViewObject = PaneView()
-           // paneView.titleLabel.text = paneDatas.getTitle(atIndex: i)
+            paneViewObject.titleLabel.text = paneDatas.getTitle(atIndex: i)
             paneViews.append(paneViewObject)
         }
     }
@@ -77,7 +81,13 @@ class MainViewController: UIViewController {
         // 移除设备方向变化的消息通知
         NSNotificationCenter.defaultCenter().removeObserver(UIDeviceOrientationDidChangeNotification)
         // 移除手势滑动通知
-
+        if let gNotisfications = self.view.gestureRecognizers
+        {
+            for gNotisfication in gNotisfications
+            {
+                self.view.removeGestureRecognizer(gNotisfication)
+            }
+        }
     }
     /** 显示背景中的视图 */
     func refreshViews() {
@@ -88,12 +98,16 @@ class MainViewController: UIViewController {
         let device = UIDevice.currentDevice()
         switch (device.orientation, device.userInterfaceIdiom)
         {
-        case (.Portrait, _),(.PortraitUpsideDown, _):
+        case (.Portrait, .Phone),(.PortraitUpsideDown, .Phone):
             numberOfRow = 3
             numberOfColumn = 2
             break
         case (.LandscapeLeft, .Phone), (.LandscapeRight, .Phone):
             numberOfRow = 2
+            numberOfColumn = 3
+            break
+        case (.Portrait, .Pad),(.PortraitUpsideDown, .Pad):
+            numberOfRow = 4
             numberOfColumn = 3
             break
         case (.LandscapeLeft, .Pad), (.LandscapeRight, .Pad):
@@ -115,28 +129,29 @@ class MainViewController: UIViewController {
         /*********************** 设置页面控制器 ***********************/
         let pageControlHeigt = verticalBorderSpace
         pageControl.frame = CGRect(x: 0, y: viewHeigt - pageControlHeigt, width: viewWidth, height: pageControlHeigt)
+        pageControl.enabled = false
+        pageControl.numberOfPages = paneViews.count / (numberOfRow * numberOfColumn) + 1
         pageControl.backgroundColor = UIColor.whiteColor()
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = themeColor
-        pageControl.enabled = false
-        pageControl.numberOfPages = paneViews.count / (numberOfRow * numberOfColumn) + 1
         
         /*********************** 设置滚动视图 ***********************/
         scrollView.frame = CGRectMake(0, verticalBorderSpace, viewWidth, viewHeigt-2 * verticalBorderSpace)
-        scrollView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageControl.numberOfPages), scrollView.frame.height)
-        scrollView.scrollToPageHorizontal(page: pageControl.currentPage)
         scrollView.scrollEnabled = false
+        scrollView.scrollToPageHorizontal(page: pageControl.currentPage)
+        scrollView.backgroundColor = UIColor.whiteColor()//UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
         /*********************** 设置pane视图 ***********************/
         let scrollFrameWidth = scrollView.frame.width
         let scrollFrameHeight = scrollView.frame.height
         //计算边间、空隙、pane的尺寸
         let horizontalEdgeSpace = scrollFrameWidth / CGFloat(15)
-        let verticalEdgeSpace = scrollFrameHeight / CGFloat(30)
-        let paneSpace = min(scrollFrameWidth, scrollFrameHeight) / CGFloat(50)
+        let verticalTopEdgeSpace = scrollFrameHeight / CGFloat(15)
+        let verticalBottomEdgeSpace = CGFloat(0) //scrollFrameHeight / CGFloat(30)
+        let paneSpace = min(scrollFrameWidth, scrollFrameHeight) / CGFloat(100)
         let paneWidth = (scrollFrameWidth - horizontalEdgeSpace * 2 - paneSpace * CGFloat(numberOfColumn - 1)) / CGFloat(numberOfColumn)
-        let paneHeigth = (scrollFrameHeight - verticalEdgeSpace * 2 - paneSpace * CGFloat(numberOfRow - 1)) / CGFloat(numberOfRow)
+        let paneHeigth = (scrollFrameHeight - verticalTopEdgeSpace - verticalBottomEdgeSpace - paneSpace * CGFloat(numberOfRow - 1)) / CGFloat(numberOfRow)
         //设置pane在父视图scrollView中的位置和背景颜色
         for var i = 0; i < paneViews.count; i++
         {
@@ -144,10 +159,10 @@ class MainViewController: UIViewController {
             let iRow = i % (numberOfRow * numberOfColumn) / numberOfColumn
             let iColumn = i % (numberOfRow * numberOfColumn) % numberOfColumn
             let x = CGFloat(iPage) * scrollFrameWidth + horizontalEdgeSpace + CGFloat(iColumn) * (paneWidth + paneSpace)
-            let y = verticalEdgeSpace + CGFloat(iRow) * (paneHeigth + paneSpace)
+            let y = verticalTopEdgeSpace + CGFloat(iRow) * (paneHeigth + paneSpace)
             paneViews[i].frame = CGRectMake(x, y, paneWidth, paneHeigth)
-            
-            paneViews[i].backgroundColor = themeColor
+            paneViews[i].contentView.backgroundColor = themeColor
+            paneViews[i].titleLabel.textColor = UIColor.whiteColor()
         }
         
         /****************** 添加滚动视图和页面控制器 ********************/
@@ -184,7 +199,7 @@ class MainViewController: UIViewController {
     
     /*
     // //////////////////////////⚠️UIScrollViewDelegate/////////////////////////////////////
-    // MARK: - UIScrollViewDelegate
+    // MARK- UIScrollViewDelegate
     /** 通过触摸滑动控制scrollView的代理方法 */
     func scrollViewDidScroll(scrollView: UIScrollView) {
         //获取正确的currentPage
