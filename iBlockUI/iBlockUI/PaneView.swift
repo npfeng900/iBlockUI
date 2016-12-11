@@ -55,16 +55,18 @@ class PaneView: UIView {
         return nib.instantiateWithOwner(self, options: nil)[0] as! UIView
     }
     /** 加载视图 */
-    func loadView() {
+    private func loadView() {
         if self.contentView == nil
         {
             //contentView为空时执行加载操作
             self.contentView = self.getViewWithNibName(self.getXibName(), owner: self)
+            self.contentView.userInteractionEnabled = true
+            self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "singleTap"))
             self.addSubview(self.contentView)
-            
         }
     }
-    /** 设置控件的布局约束条件 */
-  
-    
+    /** 单击事件处理函数 */
+    func singleTap() {
+        print(titleLabel.text)
+    }
 }

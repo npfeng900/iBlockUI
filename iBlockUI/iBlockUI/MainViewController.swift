@@ -59,6 +59,7 @@ class MainViewController: UIViewController {
         {
             let paneViewObject = PaneView()
             paneViewObject.titleLabel.text = paneDatas.getTitle(atIndex: i)
+            paneViewObject.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "longPress:"))
             paneViews.append(paneViewObject)
         }
     }
@@ -206,6 +207,14 @@ class MainViewController: UIViewController {
         pageControl.currentPage--
         scrollView.scrollToPageHorizontal(page: pageControl.currentPage)
     }
+    /** 长按事件处理函数 */
+    func longPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == UIGestureRecognizerState.Began
+        {
+            print("长按事件")
+        }
+    }
+
     
     /*
     // //////////////////////////⚠️UIScrollViewDelegate/////////////////////////////////////
