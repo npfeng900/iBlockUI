@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     
     // ///////////////////////////////////////////////////////////////////////////////
     // MARK: - 自定义属性
+    // AppHeader视图
+    var appHeaderView = UIImageView()
     // 滚动视图页面控制器
     var pageControl = UIPageControl()
     // 滚动视图
@@ -21,7 +23,7 @@ class MainViewController: UIViewController {
     // pane数据，存储了所有pane数据
     let paneDatas = PaneDatas()
     // 主题颜色
-    var themeColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.7)
+    var themeColor = UIColor(red: 0/255, green: 140/255, blue: 80/255, alpha: 1)
     
     
     // ///////////////////////////////////////////////////////////////////////////////
@@ -36,20 +38,23 @@ class MainViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    deinit {
-        deinitNotifications()
-    }
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.All
+    }
+    deinit {
+        deinitNotifications()
     }
     
     // ///////////////////////////////////////////////////////////////////////////////
     // MARK: - 自定义函数
     /** init数据信息 */
     func initDatas() {
-        //加载pane数据
+        //加载appHeaderView数据
+        appHeaderView.image = UIImage(named: "AppHeader")
+        appHeaderView.contentMode = UIViewContentMode.ScaleToFill
+        //加载paneDatas数据
         paneDatas.loadDatas(fileName: "panes", ofType: "json", inDirectory: "SupportFiles")
-        //初始化paneViews
+        //加载paneViews数据
         for var i = 0; i < paneDatas.getCount(); i++
         {
             let paneViewObject = PaneView()
@@ -126,7 +131,7 @@ class MainViewController: UIViewController {
         /*********************** 设置背景视图 ***********************/
         self.view.backgroundColor = UIColor.whiteColor()
         
-        /*********************** 设置页面控制器 ***********************/
+        /*********************** 设置pageControl视图 ***********************/
         let pageControlHeigt = verticalBorderSpace
         pageControl.frame = CGRect(x: 0, y: viewHeigt - pageControlHeigt, width: viewWidth, height: pageControlHeigt)
         pageControl.enabled = false
@@ -135,14 +140,14 @@ class MainViewController: UIViewController {
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = themeColor
         
-        /*********************** 设置滚动视图 ***********************/
+        /*********************** 设置scrollView视图 ***********************/
         scrollView.frame = CGRectMake(0, verticalBorderSpace, viewWidth, viewHeigt-2 * verticalBorderSpace)
         scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageControl.numberOfPages), scrollView.frame.height)
         scrollView.scrollEnabled = false
         scrollView.scrollToPageHorizontal(page: pageControl.currentPage)
         scrollView.backgroundColor = UIColor.whiteColor()//UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         
-        /*********************** 设置pane视图 ***********************/
+        /*********************** 设置paneViews视图 ***********************/
         let scrollFrameWidth = scrollView.frame.width
         let scrollFrameHeight = scrollView.frame.height
         //计算边间、空隙、pane的尺寸
@@ -165,7 +170,12 @@ class MainViewController: UIViewController {
             paneViews[i].titleLabel.textColor = UIColor.whiteColor()
         }
         
-        /****************** 添加滚动视图和页面控制器 ********************/
+        /*********************** 设置appHeaderView视图 ***********************/
+        appHeaderView.backgroundColor = themeColor
+        appHeaderView.frame = CGRect(x: horizontalEdgeSpace, y: 0, width: paneWidth, height: verticalBorderSpace)
+        
+        /****************** 添加所有视图 ********************/
+        self.view.addSubview(appHeaderView)
         self.view.addSubview(pageControl)
         self.view.addSubview(scrollView)
         for var i = 0; i < paneViews.count; i++

@@ -19,25 +19,27 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eK-IH-tJq">
-                    <rect key="frame" x="8" y="452" width="559" height="140"/>
+                    <rect key="frame" x="8" y="454" width="559" height="140"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="2eK-IH-tJq" secondAttribute="height" multiplier="4:1" id="q2T-Lr-VsA"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <size key="shadowOffset" width="1" height="1"/>
                     <variation key="widthClass=compact">
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     </variation>
                     <variation key="heightClass=regular-widthClass=regular">
-                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                     </variation>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="2eK-IH-tJq" firstAttribute="trailing" secondItem="ads-T8-XNV" secondAttribute="trailing" multiplier="23:24" constant="-8" id="OFs-yj-XGs"/>
-                <constraint firstItem="2eK-IH-tJq" firstAttribute="bottom" secondItem="ads-T8-XNV" secondAttribute="bottom" constant="-8" id="U4o-TS-rSJ">
+                <constraint firstItem="2eK-IH-tJq" firstAttribute="bottom" secondItem="ads-T8-XNV" secondAttribute="bottom" constant="-6" id="U4o-TS-rSJ">
                     <variation key="heightClass=regular-widthClass=regular" constant="-6"/>
                 </constraint>
                 <constraint firstItem="2eK-IH-tJq" firstAttribute="leading" secondItem="ads-T8-XNV" secondAttribute="leading" constant="8" id="nEI-Fs-DYc"/>

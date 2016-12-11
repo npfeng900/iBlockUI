@@ -19,28 +19,36 @@ class PaneDatas {
     func loadDatas(fileName fileName:String, ofType ext: String, inDirectory subPath: String) {
         //获取文件位置
         let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: ext, inDirectory: subPath)
-        //读取json文件中的栏目简要内容,并赋值给paneViews
-        if let data = NSData(contentsOfFile: filePath!)
+        switch ext
         {
-            do
+        case "json":
+            //读取json文件中的栏目简要内容,并赋值给paneViews
+            if let data = NSData(contentsOfFile: filePath!)
             {
-                if let jsonObjects:NSArray = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSArray
+                do
                 {
-                    for jsonObject in jsonObjects
+                    if let jsonObjects:NSArray = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSArray
                     {
-                        if let jsonObjectDic = jsonObject as? NSDictionary
+                        for jsonObject in jsonObjects
                         {
-                            datas.append(jsonObjectDic)
+                            if let jsonObjectDic = jsonObject as? NSDictionary
+                            {
+                                datas.append(jsonObjectDic)
+                            }
+                            
                         }
-                        
                     }
                 }
+                catch
+                {
+                    print("Load PaneData Error!!")
+                }
             }
-            catch
-            {
-                print("Load PaneData Error!!")
-            }
+            break
+        default:
+            break
         }
+        
     }
     
     /** 获取datas的个数
